@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings xmlns="http://www.example.org/settings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/settings settings.xsd ">
-  <width>800</width>
-  <height>600</height>
+  <width>1280</width>
+  <height>1024</height>
   <fps>120</fps>
 </settings>

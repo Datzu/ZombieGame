@@ -1,6 +1,7 @@
 package com.murkhies.zombiegame.utils;
 
 import java.awt.Image;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 

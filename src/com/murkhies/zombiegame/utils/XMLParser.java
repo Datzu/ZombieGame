@@ -1,7 +1,5 @@
 package com.murkhies.zombiegame.utils;
 
-import java.io.File;
-
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
@@ -17,7 +15,7 @@ public class XMLParser {
 	public void build() {
 		try {
 			doc = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-					.parse(new File(path));
+					.parse(getClass().getResourceAsStream(path));
 			doc.getDocumentElement().normalize();
 		} catch (Exception e) {
 			e.printStackTrace();

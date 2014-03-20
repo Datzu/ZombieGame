@@ -1,3 +1,4 @@
+package com.murkhies.zombiegame.tests;
 
 import java.awt.Component;
 import java.awt.event.*;
@@ -14,7 +15,6 @@ public class InputHandler implements KeyListener {
 		if (keyCode > 0 && keyCode < 256) {
 			return keys [keyCode];
 		}
-
 		return false;
 	}
 

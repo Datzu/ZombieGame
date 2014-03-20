@@ -3,8 +3,6 @@ package com.murkhies.zombiegame.screens;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
@@ -19,7 +17,7 @@ import javax.swing.SwingConstants;
 import com.murkhies.zombiegame.Start;
 import com.murkhies.zombiegame.utils.Art;
 
-public class SettingsScreen extends JPanel implements MouseListener {
+public class SettingsScreen extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -39,7 +37,6 @@ public class SettingsScreen extends JPanel implements MouseListener {
 		
 		this.start = start;
 		
-		addMouseListener(this);
 		setLayout(null);
 		
 		//WIDTH
@@ -103,7 +100,7 @@ public class SettingsScreen extends JPanel implements MouseListener {
 		add(txtFPS);
 
 		// LAUNCH
-		JButton btnLaunch = new JButton("Launch");
+		JButton btnLaunch = new JButton("Save");
 		btnLaunch.setBounds((800*LEFT_MARGING_TXT)/100, (600*80)/100, (800*20)/100, (600*5)/100);
 		btnLaunch.setBackground(backgroundColor);
 		btnLaunch.setForeground(foregroundColor);
@@ -151,28 +148,4 @@ public class SettingsScreen extends JPanel implements MouseListener {
 		super.paint(g);
 	}
 	
-	@Override
-	public void mouseClicked(MouseEvent m) {
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent m) {
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent m) {
-		
-	}
-	
-	@Override
-	public void mousePressed(MouseEvent m) {
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent m) {
-		
-	}
 }

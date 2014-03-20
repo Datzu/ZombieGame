@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import com.murkhies.zombiegame.screens.SettingsScreen;
+import com.murkhies.zombiegame.screens.TitleScreen;
 import com.murkhies.zombiegame.utils.Strings;
 import com.murkhies.zombiegame.utils.XMLParser;
 
@@ -20,11 +20,11 @@ public class Start extends JFrame {
 	public Start() {
 		getXmlConf();
 		setVisible(true);
-		setSize(800, 600);
+		setSize(WIDTH, HEIGHT);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
-		add(new SettingsScreen(this));
+		add(new TitleScreen(this));
 	}
 
 	public void getXmlConf() {
@@ -37,10 +37,6 @@ public class Start extends JFrame {
 			WIDTH = Integer.parseInt(xmlParser.getValue("width"));
 			HEIGHT = Integer.parseInt(xmlParser.getValue("height"));
 			FPS = Integer.parseInt(xmlParser.getValue("fps"));
-			
-			System.out.println("Width: " + WIDTH);
-			System.out.println("Height: " + HEIGHT);
-			System.out.println("FPS: " + FPS);
 
 		} catch (Exception e) {
 			e.printStackTrace();

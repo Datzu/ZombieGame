@@ -19,6 +19,9 @@ public class TitleScreen extends JPanel {
 	
 	Start start;
 	Image image;
+	
+	final Color foregroundColor = Color.white;
+	final Color backgroundColor = Color.black;
 
 	public TitleScreen(final Start start) {
 
@@ -27,9 +30,9 @@ public class TitleScreen extends JPanel {
 		setLayout(null);
 		
 		JButton btnLaunch = new JButton("Launch");
-		btnLaunch.setBounds((start.WIDTH*40)/100, (600*80)/100, (800*20)/100, (600*5)/100);
-		btnLaunch.setBackground(Color.black);
-		btnLaunch.setForeground(Color.red);
+		btnLaunch.setBounds((start.WIDTH*40)/100, (start.HEIGHT*68)/100, (start.WIDTH*20)/100, (start.HEIGHT*5)/100);
+		btnLaunch.setBackground(backgroundColor);
+		btnLaunch.setForeground(foregroundColor);
 		btnLaunch.addMouseListener(new MouseListener() {
 			
 			@Override
@@ -58,6 +61,72 @@ public class TitleScreen extends JPanel {
 			}
 		});
 		add(btnLaunch);
+		
+		JButton btnSettings = new JButton("Settings");
+		btnSettings.setBounds((start.WIDTH*40)/100, (start.HEIGHT*75)/100, (start.WIDTH*20)/100, (start.HEIGHT*5)/100);
+		btnSettings.setBackground(backgroundColor);
+		btnSettings.setForeground(foregroundColor);
+		btnSettings.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				start.changePanel(new SettingsScreen(start));
+			}
+		});
+		add(btnSettings);
+		
+		JButton btnExit = new JButton("Exit");
+		btnExit.setBounds((start.WIDTH*40)/100, (start.HEIGHT*82)/100, (start.WIDTH*20)/100, (start.HEIGHT*5)/100);
+		btnExit.setBackground(backgroundColor);
+		btnExit.setForeground(foregroundColor);
+		btnExit.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.exit(0);
+			}
+		});
+		add(btnExit);
 		
 		
 		

@@ -8,7 +8,6 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 import com.murkhies.zombiegame.Start;
 import com.murkhies.zombiegame.utils.Art;
@@ -57,7 +56,10 @@ public class TitleScreen extends JPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				start.changePanel(new GameScreen(start));
+				GameScreen gameScreen = new GameScreen(start);
+				start.setGameScreen(gameScreen);
+				start.changePanel(gameScreen);
+				new Thread(start).start();
 			}
 		});
 		add(btnLaunch);

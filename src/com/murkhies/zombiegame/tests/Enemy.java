@@ -1,6 +1,8 @@
 package com.murkhies.zombiegame.tests;
 import java.util.Random;
 
+import com.murkhies.zombiegame.actors.Player;
+
 public class Enemy {
 
 	Player player;

@@ -12,6 +12,8 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import com.murkhies.zombiegame.actors.Player;
+
 public class Screen extends JPanel {
 
 	private static final long serialVersionUID = 5280294122605773228L;
@@ -60,7 +62,7 @@ public class Screen extends JPanel {
 
 	void initialize() {
 
-		this.player = new Player(windowWidth / 2, windowHeight / 2);
+		// this.player = new Player(windowWidth / 2, windowHeight / 2);
 
 		insets = getInsets();
 		setSize(insets.left + windowWidth + insets.right, insets.top
@@ -93,9 +95,9 @@ public class Screen extends JPanel {
 		}
 		if (input.isKeyDown(KeyEvent.VK_SPACE)) {
 			if (player.canShoot()) {
-				Bullet bullet = new Bullet(player.getX() - 4,
-						player.getY() + 10, player.getDir());
-				bulletList.add(bullet);
+//				Bullet bullet = new Bullet(player.getX() - 4,
+//						player.getY() + 10, player.getDir());
+//				bulletList.add(bullet);
 				try {
 					bulletHandler.join();
 				} catch (Exception e) {
@@ -122,7 +124,7 @@ public class Screen extends JPanel {
 		bbg.fillRect(0, 0, windowWidth, windowHeight);
 
 		bbg.setColor(Color.BLACK);
-		bbg.drawOval(player.getX(), player.getY(), 20, 20);
+//		bbg.drawOval(player.getX(), player.getY(), 20, 20);
 
 		bbg.setColor(Color.RED);
 		for (Enemy enemy : enemyList) {

@@ -4,11 +4,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import com.murkhies.zombiegame.screens.GameScreen;
 import com.murkhies.zombiegame.screens.TitleScreen;
 import com.murkhies.zombiegame.utils.Strings;
 import com.murkhies.zombiegame.utils.XMLParser;
 
-public class Start extends JFrame {
+public class Start extends JFrame implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -16,6 +17,7 @@ public class Start extends JFrame {
 	public int HEIGHT;
 	public int FPS;
 	XMLParser xmlParser;
+	GameScreen gameScreen;
 	
 	public Start() {
 		getXmlConf();
@@ -26,6 +28,24 @@ public class Start extends JFrame {
 		setResizable(false);
 		add(new TitleScreen(this));
 	}
+	
+	@Override
+	public void run() {
+		while (true) {
+			long time = System.currentTimeMillis();
+
+			time = (1000 / FPS) - (System.currentTimeMillis() - time);
+
+			if (time > 0) {
+				try {
+					gameScreen.paint(getGraphics());
+					Thread.sleep(time);
+				} catch (Exception e) {
+				}
+			}
+		}
+	}	
+
 
 	public void getXmlConf() {
 		xmlParser = new XMLParser();
@@ -65,8 +85,11 @@ public class Start extends JFrame {
 	}
 
 	public void saveXML() {
-		
 		getXmlConf();
+	}
+	
+	public void setGameScreen(GameScreen gameScreen) {
+		this.gameScreen = gameScreen;
 	}
 
 }

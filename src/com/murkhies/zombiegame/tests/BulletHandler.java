@@ -1,5 +1,7 @@
 package com.murkhies.zombiegame.tests;
 
+import com.murkhies.zombiegame.actors.Player;
+
 public class BulletHandler extends Thread {
 	
 	Player player;

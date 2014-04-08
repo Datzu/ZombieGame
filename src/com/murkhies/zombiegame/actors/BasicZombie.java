@@ -17,9 +17,9 @@ public class BasicZombie extends Thread {
 	Image image;
 	Player player;
 
-	float x = 0, y = 0;
-	float speed = (float) (new Random().nextDouble()+0.3);
-	int health = 10;
+	int x = 0, y = 0;
+	int speed = new Random().nextInt(1)+2;
+	int health = 2;
 
 	boolean shoot = true;
 
@@ -52,25 +52,25 @@ public class BasicZombie extends Thread {
 	}
 
 	public void up() {
-		image = new Art().getBasicZombie(0);
+		image = Start.art.getBasicZombie(0);
 		y -= speed;
 		dir = 0;
 	}
 
 	public void down() {
-		image = new Art().getBasicZombie(2);
+		image = Start.art.getBasicZombie(2);
 		y += speed;
 		dir = 1;
 	}
 
 	public void left() {
-		image = new Art().getBasicZombie(3);
+		image = Start.art.getBasicZombie(3);
 		x -= speed;
 		dir = 2;
 	}
 
 	public void right() {
-		image = new Art().getBasicZombie(1);
+		image = Start.art.getBasicZombie(1);
 		x += speed;
 		dir = 3;
 	}
@@ -96,20 +96,46 @@ public class BasicZombie extends Thread {
 	}
 
 	public void paint(Graphics g) {
-		g.drawImage(image, (int) x, (int) y, 32, 32, gameScreen);
+		int tmp = x+8;
+		for (int i = 0; i < health; i++) {
+			g.drawImage(Start.art.getHeart(), tmp+i*10, y-10, gameScreen);
+		}
+		g.drawImage(image, x, y, 32, 32, gameScreen);
 	}
 	
 	void update() {
-		if (y > player.getY()) {
+		int tempSpeed = speed;
+		speed /= 2;
+		if (y < player.getY() && x > player.getX()) {
 			up();
-		}else if (y < player.getY()) {
-			down();
-		}
-		if (x < player.getX()) {
-			right();
-		} else if (x > player.getX()) {
 			left();
 		}
+		if (y > player.getY() && x < player.getX()) {
+			up();
+			right();
+		}
+		if (y < player.getY() && x < player.getX()) {
+			down();
+			right();
+		}
+		if (y < player.getY() && x > player.getX()) {
+			down();
+			left();
+		}
+		speed = tempSpeed;
+		if (y > player.getY() + 20) {
+			up();
+		}
+		if (x < player.getX() - 20) {
+			right();
+		}
+		if (y < player.getY() - 10) {
+			down();
+		}
+		if (x > player.getX() + 20) {
+			left();
+		}
+		
 	}
 
 }

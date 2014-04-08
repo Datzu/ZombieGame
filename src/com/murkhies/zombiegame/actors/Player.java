@@ -1,5 +1,6 @@
 package com.murkhies.zombiegame.actors;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 
@@ -15,21 +16,21 @@ public class Player extends Thread {
 	Start start;
 	GameScreen gameScreen;
 	Image image;
-	public InputHandler inputHandler;
+	InputHandler inputHandler;
 
-	float x = 0, y = 0;
-	float speed = 5f;
-	int health = 10;
+	int x = 0, y = 0;
+	int speed = 4;
+	int health = 5;
 
 	boolean shoot = true;
 
-	public Player(Start start, GameScreen gameScreen) {
+	public Player(Start start, GameScreen gameScreen, InputHandler inputHandler) {
 		this.start = start;
 		this.gameScreen = gameScreen;
 		this.x = start.WIDTH / 2;
 		this.y = start.HEIGHT / 2;
-		image = new Art().getPlayer(0);
-		inputHandler = new InputHandler(gameScreen);
+		image = Start.art.getPlayer(0);
+		this.inputHandler = inputHandler;
 	}
 
 	@Override
@@ -49,37 +50,50 @@ public class Player extends Thread {
 				}
 			}
 		}
+		System.exit(0);
+	}
+	
+	public void hurt() {
+		health--;
 	}
 
 	public void up() {
-		image = new Art().getPlayer(0);
-		y -= speed;
+		image = Start.art.getPlayer(0);
+		if (y + speed > 0+30) {
+			y -= speed;
+		}
 		dir = 0;
 	}
 
 	public void down() {
-		image = new Art().getPlayer(2);
-		y += speed;
-		dir = 1;
-	}
-
-	public void left() {
-		image = new Art().getPlayer(3);
-		x -= speed;
+		image = Start.art.getPlayer(2);
+		if (y - speed < start.HEIGHT-60) {
+			y += speed;
+		}
 		dir = 2;
 	}
 
-	public void right() {
-		image = new Art().getPlayer(1);
-		x += speed;
+	public void left() {
+		image = Start.art.getPlayer(3);
+		if (x + speed > 0+25) {
+			x -= speed;
+		}
 		dir = 3;
 	}
 
-	public float getX() {
+	public void right() {
+		image = Start.art.getPlayer(1);
+		if (x - speed < start.WIDTH-60) {
+			x += speed;
+		}
+		dir = 1;
+	}
+
+	public int getX() {
 		return this.x;
 	}
 
-	public float getY() {
+	public int getY() {
 		return this.y;
 	}
 
@@ -95,8 +109,12 @@ public class Player extends Thread {
 		this.shoot = shoot;
 	}
 
-	public void paint() {
-		start.getGraphics().drawImage(image, (int) x, (int) y, 32, 32, gameScreen);
+	public void paint(Graphics g) {
+		int tmp = x-6;
+		for (int i = 0; i < health; i++) {
+			g.drawImage(Start.art.getHeart(), tmp+i*10, y-10, gameScreen);
+		}
+		g.drawImage(image, x, y, 32, 32, gameScreen);
 	}
 	
 	void update() {
@@ -111,6 +129,10 @@ public class Player extends Thread {
 		}
 		if (inputHandler.isKeyDown(KeyEvent.VK_W)) {
 			up();
+		}
+		if (inputHandler.isKeyDown(KeyEvent.VK_SPACE)) {
+			new Explosion(this).paint(start.getGraphics());
+			gameScreen.newShoot();
 		}
 	}
 

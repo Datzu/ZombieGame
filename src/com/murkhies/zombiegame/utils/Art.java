@@ -1,6 +1,7 @@
 package com.murkhies.zombiegame.utils;
 
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 
@@ -11,6 +12,10 @@ public class Art {
 	
 	Image[] player = new Image[4];
 	Image[] basicZombie = new Image[4];
+	Image heart;
+	
+	Image explosion;
+	Image bullet;
 
 	public Art() {
 		generalBackground = new ImageIcon(getClass().getResource("/background.png")).getImage();
@@ -21,10 +26,15 @@ public class Art {
 		player[2] = new ImageIcon(getClass().getResource("/player2.png")).getImage();
 		player[3] = new ImageIcon(getClass().getResource("/player3.png")).getImage();
 		
+		heart = new ImageIcon(getClass().getResource("/heart.png")).getImage();
+				
 		basicZombie[0] = new ImageIcon(getClass().getResource("/basicZombie0.png")).getImage();
 		basicZombie[1] = new ImageIcon(getClass().getResource("/basicZombie1.png")).getImage();
 		basicZombie[2] = new ImageIcon(getClass().getResource("/basicZombie2.png")).getImage();
 		basicZombie[3] = new ImageIcon(getClass().getResource("/basicZombie3.png")).getImage();
+		
+		explosion = new ImageIcon(getClass().getResource("/explosion.png")).getImage();
+		bullet = new ImageIcon(getClass().getResource("/bullet.png")).getImage();
 		
 	}
 
@@ -42,6 +52,18 @@ public class Art {
 	
 	public Image getBasicZombie(int i) {
 		return basicZombie[i];
+	}
+
+	public Image getExplosion() {
+		return explosion;
+	}
+
+	public Image getBullet() {
+		return bullet;
+	}
+	
+	public Image getHeart() {
+		return heart;
 	}
 
 }

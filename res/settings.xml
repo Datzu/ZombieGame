@@ -2,5 +2,5 @@
 <settings xmlns="http://www.example.org/settings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/settings settings.xsd ">
   <width>800</width>
   <height>600</height>
-  <fps>90</fps>
+  <fps>120</fps>
 </settings>

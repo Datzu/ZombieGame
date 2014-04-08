@@ -56,7 +56,7 @@ public class TitleScreen extends JPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				GameScreen gameScreen = new GameScreen(start);
+				GameScreen gameScreen = new GameScreen(start, start.inputHandler);
 				start.setGameScreen(gameScreen);
 				start.changePanel(gameScreen);
 				new Thread(start).start();

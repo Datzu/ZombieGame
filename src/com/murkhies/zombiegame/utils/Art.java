@@ -1,7 +1,6 @@
 package com.murkhies.zombiegame.utils;
 
 import java.awt.Image;
-import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 
@@ -16,6 +15,7 @@ public class Art {
 	
 	Image explosion;
 	Image bullet;
+	Image ammoBox;
 
 	public Art() {
 		generalBackground = new ImageIcon(getClass().getResource("/background.png")).getImage();
@@ -35,6 +35,7 @@ public class Art {
 		
 		explosion = new ImageIcon(getClass().getResource("/explosion.png")).getImage();
 		bullet = new ImageIcon(getClass().getResource("/bullet.png")).getImage();
+		ammoBox = new ImageIcon(getClass().getResource("/ammobox.png")).getImage();
 		
 	}
 
@@ -64,6 +65,10 @@ public class Art {
 	
 	public Image getHeart() {
 		return heart;
+	}
+
+	public Image getAmmoBox() {
+		return ammoBox;
 	}
 
 }

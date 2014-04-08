@@ -2,6 +2,7 @@ package com.murkhies.zombiegame.actors;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.util.Random;
 
 import com.murkhies.zombiegame.Start;
@@ -16,18 +17,20 @@ public class BasicZombie extends Thread {
 	GameScreen gameScreen;
 	Image image;
 	Player player;
+	
+	Rectangle rec;
 
 	int x = 0, y = 0;
-	int speed = new Random().nextInt(1)+2;
-	int health = 2;
+	int speed = 1;
+	int health = 3;
 
 	boolean shoot = true;
 
 	public BasicZombie(Start start, GameScreen gameScreen, Player player) {
 		this.start = start;
 		this.gameScreen = gameScreen;
-		this.x = start.WIDTH / 2;
-		this.y = start.HEIGHT / 2;
+		x = new Random().nextInt(start.WIDTH-70)+30;
+		y = new Random().nextInt(start.HEIGHT-70)+30;
 		image = new Art().getBasicZombie(0);
 		this.player = player;
 		new Thread(this).start();
@@ -44,7 +47,7 @@ public class BasicZombie extends Thread {
 			if (time > 0) {
 				try {
 					update();
-					Thread.sleep(time);
+					Thread.sleep(200);
 				} catch (Exception e) {
 				}
 			}
@@ -98,7 +101,7 @@ public class BasicZombie extends Thread {
 	public void paint(Graphics g) {
 		int tmp = x+8;
 		for (int i = 0; i < health; i++) {
-			g.drawImage(Start.art.getHeart(), tmp+i*10, y-10, gameScreen);
+			g.drawImage(Start.art.getHeart(), tmp+i*8, y-10, gameScreen);
 		}
 		g.drawImage(image, x, y, 32, 32, gameScreen);
 	}
@@ -135,7 +138,30 @@ public class BasicZombie extends Thread {
 		if (x > player.getX() + 20) {
 			left();
 		}
-		
+		rec = new Rectangle(x, y, 32, 32);
+		if (rec.intersects(player.getRec())) {
+			player.hurt();
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public Rectangle getRec() {
+		return rec;
+	}
+	
+	public void die() {
+		stop();
+	}
+
+	public void hurt() {
+		health--;
+		if (health == 0) {
+			gameScreen.removeZombie(this);
+		}
 	}
 
 }

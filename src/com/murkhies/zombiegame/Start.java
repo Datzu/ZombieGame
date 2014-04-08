@@ -2,10 +2,7 @@ package com.murkhies.zombiegame;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.RenderingHints.Key;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,6 +13,7 @@ import com.murkhies.zombiegame.screens.TitleScreen;
 import com.murkhies.zombiegame.utils.Art;
 import com.murkhies.zombiegame.utils.InputHandler;
 import com.murkhies.zombiegame.utils.Strings;
+import com.murkhies.zombiegame.utils.UI;
 import com.murkhies.zombiegame.utils.XMLParser;
 
 public class Start extends JFrame implements Runnable {
@@ -50,7 +48,7 @@ public class Start extends JFrame implements Runnable {
 	
 	@Override
 	public void run() {
-		while (true) {
+		while (gameScreen != null) {
 			long time = System.currentTimeMillis();
 
 			time = (1000 / FPS) - (System.currentTimeMillis() - time);
@@ -120,7 +118,6 @@ public class Start extends JFrame implements Runnable {
 		getContentPane().removeAll();
 		getContentPane().add(nextPanel);
 		revalidate();
-		repaint();
 	}
 
 	public void saveXML() {
@@ -129,6 +126,10 @@ public class Start extends JFrame implements Runnable {
 	
 	public void setGameScreen(GameScreen gameScreen) {
 		this.gameScreen = gameScreen;
+	}
+
+	public void stopAll() {
+		gameScreen = null;
 	}
 
 }

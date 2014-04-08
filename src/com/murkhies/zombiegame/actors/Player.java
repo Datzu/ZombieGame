@@ -2,11 +2,12 @@ package com.murkhies.zombiegame.actors;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 import com.murkhies.zombiegame.Start;
 import com.murkhies.zombiegame.screens.GameScreen;
-import com.murkhies.zombiegame.utils.Art;
+import com.murkhies.zombiegame.screens.TitleScreen;
 import com.murkhies.zombiegame.utils.InputHandler;
 
 public class Player extends Thread {
@@ -19,8 +20,13 @@ public class Player extends Thread {
 	InputHandler inputHandler;
 
 	int x = 0, y = 0;
-	int speed = 4;
-	int health = 5;
+	int speed = 2;
+	int maxHealth = 5;
+	int health = maxHealth;
+	int maxBullets = 50;
+	int bullets = maxBullets;
+	
+	Rectangle rec;
 
 	boolean shoot = true;
 
@@ -29,6 +35,7 @@ public class Player extends Thread {
 		this.gameScreen = gameScreen;
 		this.x = start.WIDTH / 2;
 		this.y = start.HEIGHT / 2;
+		rec = new Rectangle(x, y, 32, 32);
 		image = Start.art.getPlayer(0);
 		this.inputHandler = inputHandler;
 	}
@@ -50,11 +57,12 @@ public class Player extends Thread {
 				}
 			}
 		}
-		System.exit(0);
+		start.stopAll();
+		start.changePanel(new TitleScreen(start));
 	}
 	
 	public void hurt() {
-		health--;
+		health -= 2;
 	}
 
 	public void up() {
@@ -108,6 +116,10 @@ public class Player extends Thread {
 	public void setShoot(boolean shoot) {
 		this.shoot = shoot;
 	}
+	
+	public int getBullets() {
+		return bullets;
+	}
 
 	public void paint(Graphics g) {
 		int tmp = x-6;
@@ -131,9 +143,50 @@ public class Player extends Thread {
 			up();
 		}
 		if (inputHandler.isKeyDown(KeyEvent.VK_SPACE)) {
-			new Explosion(this).paint(start.getGraphics());
-			gameScreen.newShoot();
+			if (bullets > 0) {
+				new Explosion(this).paint(start.getGraphics());
+				bullets--;
+				gameScreen.newShoot();
+				inputHandler.setKeys(KeyEvent.VK_SPACE, false);
+			}
 		}
+		rec.setBounds(x, y, 32, 32);
+		for (AmmoBox ammoBox : gameScreen.ammoBoxList) {
+			if (rec.intersects(ammoBox.rec)) {
+				if (bullets == maxBullets) {
+					return;
+				}
+				if (bullets + 20 <= maxBullets) {
+					bullets += 20;
+				} else if (bullets + 20 > maxBullets) {
+					bullets = maxBullets;
+				}
+				gameScreen.removeAmmoBox(ammoBox);
+				return;
+			}
+		}
+		for (Heart heart : gameScreen.heartList) {
+			if (rec.intersects(heart.rec)) {
+				if (health == maxHealth) {
+					return;
+				}
+				if (health + 1 <= maxHealth) {
+					health++;
+				} else if (bullets + 1 > maxBullets) {
+					health = maxHealth;
+				}
+				gameScreen.removeHeart(heart);
+				return;
+			}
+		}
+	}
+	
+	public Rectangle getRec() {
+		return rec;
+	}
+
+	public int getMaxBullets() {
+		return maxBullets;
 	}
 
 }

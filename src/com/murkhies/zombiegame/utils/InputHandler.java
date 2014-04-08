@@ -30,6 +30,10 @@ public class InputHandler implements KeyListener {
 			keys[e.getKeyCode()] = false;
 		}
 	}
+	
+	public void setKeys(int i, boolean b) {
+		this.keys [i] = b;
+	}
 
 	public void keyTyped(KeyEvent e) {
 		

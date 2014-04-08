@@ -2,10 +2,12 @@ package com.murkhies.zombiegame.actors;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.murkhies.zombiegame.Start;
 import com.murkhies.zombiegame.screens.GameScreen;
-import com.murkhies.zombiegame.utils.Art;
 
 public class Bullet extends Thread {
 	
@@ -15,13 +17,17 @@ public class Bullet extends Thread {
 	boolean alive = true;
 	GameScreen gameScreen;
 	Start start;
+	List<BasicZombie> basicZombieList;
 	
-	public Bullet(Player player, Start start, int dir, int heigth,int width, GameScreen gameScreen) {
+	Rectangle rec;
+	
+	public Bullet(Player player, Start start, int dir, int heigth,int width, GameScreen gameScreen, List<BasicZombie> basicZombieList) {
 		this.dir = dir;
 		this.heigth = heigth;
 		this.width = width;
 		this.gameScreen = gameScreen;
 		this.start = start;
+		this.basicZombieList = basicZombieList;
 		image = Start.art.getBullet();
 		switch (dir) {
 			case 0:
@@ -42,12 +48,24 @@ public class Bullet extends Thread {
 			default:
 				break;
 		}
+		rec = new Rectangle(x, y, 4, 4);
 	}
 	
 	@Override
 	public void run() {
 		super.run();
 		while (alive) {
+			for (BasicZombie basicZombie : basicZombieList) {
+				if (basicZombie.getRec() == null) {
+					return;
+				}
+				if (rec.intersects(basicZombie.getRec())) {
+					basicZombie.hurt();
+					alive = false;
+					gameScreen.endShoot(this);
+					return;
+				}
+			}
 			switch (dir) {
 				case 0:
 					y -= speed;
@@ -76,6 +94,7 @@ public class Bullet extends Thread {
 				default:
 					break;
 			}
+			rec = new Rectangle(x, y, 4, 4);
 			try {
 				Thread.sleep(3);
 			} catch (InterruptedException e) {

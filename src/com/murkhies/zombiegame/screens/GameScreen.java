@@ -10,9 +10,12 @@ import javax.swing.JPanel;
 import com.murkhies.zombiegame.Start;
 import com.murkhies.zombiegame.actors.AmmoBox;
 import com.murkhies.zombiegame.actors.BasicZombie;
+import com.murkhies.zombiegame.actors.Boss;
 import com.murkhies.zombiegame.actors.Bullet;
 import com.murkhies.zombiegame.actors.ExplosionOnCoord;
+import com.murkhies.zombiegame.actors.ExplosionOnCoordMissile;
 import com.murkhies.zombiegame.actors.Heart;
+import com.murkhies.zombiegame.actors.Missile;
 import com.murkhies.zombiegame.actors.Player;
 import com.murkhies.zombiegame.utils.Generate;
 import com.murkhies.zombiegame.utils.InputHandler;
@@ -24,8 +27,10 @@ public class GameScreen extends JPanel {
 
 	Start start;
 	Player player;
+	Boss boss;
 	List<BasicZombie> basicZombieList = new ArrayList<BasicZombie>();
 	List<Bullet> bulletList = new ArrayList<Bullet>();
+	List<Missile> missileList = new ArrayList<Missile>();
 	public static List<Heart> heartList = new ArrayList<Heart>();
 	public static List<AmmoBox> ammoBoxList = new ArrayList<AmmoBox>();
 	InputHandler inputHandler;
@@ -46,9 +51,11 @@ public class GameScreen extends JPanel {
 		ui = new UI(player, start, this);
 		new Generate(start, this).start();
 
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 0; i++) {
 			basicZombieList.add(new BasicZombie(start, this, player));
 		}
+		
+		boss = new Boss(start, this, player);
 
 		setLayout(null);
 	}
@@ -64,7 +71,13 @@ public class GameScreen extends JPanel {
 		for (BasicZombie basicZombie : basicZombieList) {
 			basicZombie.paint(g);
 		}
+		if (boss != null) {
+			boss.paint(g);
+		}
 		player.paint(g);
+		if (boss != null && boss.getY() > player.getY()-70) {
+			boss.paint(g);
+		}
 		for (BasicZombie basicZombie : basicZombieList) {
 			if (basicZombie.getY() > player.getY()) {
 				basicZombie.paint(g);
@@ -73,11 +86,14 @@ public class GameScreen extends JPanel {
 		for (Bullet bullet : bulletList) {
 			bullet.paint(g);
 		}
+		for (Missile missile : missileList) {
+			missile.paint(g);
+		}
 		ui.paint(g);
 	}
 	
 	public void newShoot() {
-		Bullet bullet = new Bullet(player, start, player.getDir(), start.HEIGHT, start.WIDTH, this, basicZombieList);
+		Bullet bullet = new Bullet(player, start, player.getDir(), start.HEIGHT, start.WIDTH, this, basicZombieList, boss);
 		new Thread(bullet).start();
 		bulletList.add(bullet);
 	}
@@ -128,6 +144,19 @@ public class GameScreen extends JPanel {
 	
 	public void removeHeart(Heart heart) {
 		heartList.remove(heart);
+	}
+
+	public void missileExplosion(Missile missile) {
+		for (int i = 0; i < 5; i++) {
+			new ExplosionOnCoordMissile(missile.getX(), missile.getY()-1, this).paint(start.getGraphics());
+		}
+		missileList.remove(missile);
+	}
+
+	public void newMissile() {
+		Missile missile = new Missile(player, start, boss.getDir(), start.HEIGHT, start.WIDTH, this, basicZombieList, boss);
+		new Thread(missile).start();
+		missileList.add(missile);
 	}
 
 }

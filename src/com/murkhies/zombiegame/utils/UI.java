@@ -1,5 +1,6 @@
 package com.murkhies.zombiegame.utils;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.font.TextAttribute;
 
@@ -22,6 +23,7 @@ public class UI {
 	}
 	
 	public void paint(Graphics g) {
+		g.setColor(Color.blue);
 		g.drawString(player.getBullets() + " / " + player.getMaxBullets(), 25, 50);
 		g.drawString("Points: " + points, 80, 50);
 	}

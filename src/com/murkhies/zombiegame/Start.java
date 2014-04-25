@@ -44,6 +44,7 @@ public class Start extends JFrame implements Runnable {
 		addKeyListener(inputHandler);
 		setFocusable(true);
 		add(new TitleScreen(this));
+		repaint();
 	}
 	
 	@Override

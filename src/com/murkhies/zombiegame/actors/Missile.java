@@ -9,7 +9,7 @@ import java.util.List;
 import com.murkhies.zombiegame.Start;
 import com.murkhies.zombiegame.screens.GameScreen;
 
-public class Bullet extends Thread {
+public class Missile extends Thread {
 
 	Image image;
 	int dir, x, y, heigth, width;
@@ -23,7 +23,7 @@ public class Bullet extends Thread {
 
 	Rectangle rec;
 
-	public Bullet(Player player, Start start, int dir, int heigth, int width,
+	public Missile(Player player, Start start, int dir, int heigth, int width,
 			GameScreen gameScreen, List<BasicZombie> basicZombieList, Boss boss) {
 		this.player = player;
 		this.dir = dir;
@@ -35,83 +35,62 @@ public class Bullet extends Thread {
 		if (boss != null) {
 			this.boss = boss;
 		}
-		image = Start.art.getBullet();
+		image = Start.art.getMissile(dir);
 		switch (dir) {
 		case 0:
-			x = player.getX();
-			y = player.getY() + 16;
+			x = boss.getX();
+			y = boss.getY() + 16;
+			rec = new Rectangle(x, y, 4, 4);
 		case 1:
-			x = player.getX() + 26;
-			y = player.getY() + 16;
+			x = boss.getX() + 26;
+			y = boss.getY() + 16;
+			rec = new Rectangle(x, y, 4, 4);
 			break;
 		case 2:
-			x = player.getX() + 4;
-			y = player.getY() + 16;
+			x = boss.getX() + 4;
+			y = boss.getY() + 16;
+			rec = new Rectangle(x, y, 4, 4);
 			break;
 		case 3:
-			x = player.getX();
-			y = player.getY() + 16;
+			x = boss.getX();
+			y = boss.getY() + 16;
+			rec = new Rectangle(x, y, 4, 4);
 			break;
 		default:
 			break;
 		}
-		rec = new Rectangle(x, y, 4, 4);
 	}
 
 	@Override
 	public void run() {
 		super.run();
 		while (alive) {
-			for (BasicZombie basicZombie : basicZombieList) {
-				if (basicZombie.getRec() == null) {
-					return;
-				}
-				if (rec.intersects(basicZombie.getRec())) {
-					basicZombie.hurt();
-					alive = false;
-					gameScreen.endShoot(this);
-					return;
-				}
-			}
-			if (boss != null) {
-				if (boss.getDir() == 2) {
-					if (rec.intersects(boss.getRec2())) {
-						boss.hurt();
-						alive = false;
-						gameScreen.endShoot(this);
-						return;
-					}
-				} else {
-					if (rec.intersects(boss.getRec())) {
-						alive = false;
-						gameScreen.endShoot(this);
-						return;
-					}
-				}
-			} else {
-
-			}
+			
 			switch (dir) {
 			case 0:
 				y -= speed;
+				rec = new Rectangle(x, y, 4, 4);
 				if (y < 37) {
 					alive = false;
 				}
 				break;
 			case 1:
 				x += speed;
+				rec = new Rectangle(x, y, 4, 4);
 				if (x > width - 25) {
 					alive = false;
 				}
 				break;
 			case 2:
 				y += speed;
+				rec = new Rectangle(x, y, 4, 4);
 				if (y > heigth - 22) {
 					alive = false;
 				}
 				break;
 			case 3:
 				x -= speed;
+				rec = new Rectangle(x, y, 4, 4);
 				if (x < 19) {
 					alive = false;
 				}
@@ -126,7 +105,7 @@ public class Bullet extends Thread {
 				e.printStackTrace();
 			}
 		}
-		gameScreen.endShoot(this);
+		gameScreen.missileExplosion(this);
 	}
 
 	public int getY() {
@@ -138,7 +117,11 @@ public class Bullet extends Thread {
 	}
 
 	public void paint(Graphics g) {
-		g.drawImage(image, x, y, 4, 4, gameScreen);
+		if (dir == 0 || dir == 2) {
+			g.drawImage(image, x, y, 8, 20, gameScreen);
+		} else if (dir == 1 || dir == 3) {
+			g.drawImage(image, x, y, 20, 8, gameScreen);
+		}
 	}
 
 }

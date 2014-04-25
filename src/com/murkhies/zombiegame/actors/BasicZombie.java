@@ -1,5 +1,6 @@
 package com.murkhies.zombiegame.actors;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -97,13 +98,14 @@ public class BasicZombie extends Thread {
 	public void setShoot(boolean shoot) {
 		this.shoot = shoot;
 	}
-
+	
 	public void paint(Graphics g) {
-		int tmp = x+8;
 		for (int i = 0; i < health; i++) {
-			g.drawImage(Start.art.getHeart(), tmp+i*8, y-10, gameScreen);
+			g.drawImage(Start.art.getHeart(), x+i*8, y-10, gameScreen);
 		}
-		g.drawImage(image, x, y, 32, 32, gameScreen);
+		g.drawImage(image, x, y, 24, 32, gameScreen);
+//		g.setColor(Color.blue);
+//		g.drawRect(x, y, 24, 32);
 	}
 	
 	void update() {
@@ -138,7 +140,7 @@ public class BasicZombie extends Thread {
 		if (x > player.getX() + 20) {
 			left();
 		}
-		rec = new Rectangle(x, y, 32, 32);
+		rec = new Rectangle(x, y, 24, 32);
 		if (rec.intersects(player.getRec())) {
 			player.hurt();
 			try {

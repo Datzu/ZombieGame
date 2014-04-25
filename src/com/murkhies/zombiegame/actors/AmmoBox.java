@@ -19,8 +19,8 @@ public class AmmoBox {
 	public AmmoBox(GameScreen gameScreen, Start start) {
 		this.gameScreen = gameScreen;
 		image = Start.art.getAmmoBox();
-		x = new Random().nextInt(start.WIDTH-70)+50;
-		y = new Random().nextInt(start.HEIGHT-70)+50;
+		x = new Random().nextInt(start.WIDTH-70)+40;
+		y = new Random().nextInt(start.HEIGHT-70)+40;
 		rec = new Rectangle(x, y, 16, 16);
 	}
 	

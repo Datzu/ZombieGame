@@ -19,7 +19,9 @@ public class ExplosionOnCoord {
 	}
 
 	public void paint(Graphics g) {
-		g.drawImage(image, x, y, gameScreen);
+		if (gameScreen != null) {
+			g.drawImage(image, x, y, gameScreen);
+		}
 	}
 
 }

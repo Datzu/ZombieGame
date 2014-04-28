@@ -2,6 +2,7 @@ package com.murkhies.zombiegame.actors;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -37,7 +38,7 @@ public class Player extends Thread {
 		this.x = start.WIDTH / 2;
 		this.y = start.HEIGHT / 2;
 		rec = new Rectangle(x, y, 32, 32);
-		image = Start.art.getPlayer(0);
+		image = Start.art.getPlayer(2);
 		this.inputHandler = inputHandler;
 	}
 
@@ -58,6 +59,7 @@ public class Player extends Thread {
 				}
 			}
 		}
+		gameScreen.end();
 		start.stopAll();
 		start.changePanel(new TitleScreen(start));
 	}

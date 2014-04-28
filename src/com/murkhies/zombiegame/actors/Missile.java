@@ -1,6 +1,7 @@
 package com.murkhies.zombiegame.actors;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class Missile extends Thread {
 	Image image;
 	int dir, x, y, heigth, width;
 	int speed = 4;
-	boolean alive = true;
+	public boolean alive = true;
 	GameScreen gameScreen;
 	Start start;
 	List<BasicZombie> basicZombieList;
@@ -38,23 +39,23 @@ public class Missile extends Thread {
 		image = Start.art.getMissile(dir);
 		switch (dir) {
 		case 0:
-			x = boss.getX();
-			y = boss.getY() + 16;
-			rec = new Rectangle(x, y, 4, 4);
+			x = boss.getX() + 500;
+			y = boss.getY() + 200;
+			rec = new Rectangle(x, y, 8, 20);
 		case 1:
 			x = boss.getX() + 26;
 			y = boss.getY() + 16;
-			rec = new Rectangle(x, y, 4, 4);
+			rec = new Rectangle(x, y, 20, 8);
 			break;
 		case 2:
 			x = boss.getX() + 4;
 			y = boss.getY() + 16;
-			rec = new Rectangle(x, y, 4, 4);
+			rec = new Rectangle(x, y, 8, 20);
 			break;
 		case 3:
 			x = boss.getX();
 			y = boss.getY() + 16;
-			rec = new Rectangle(x, y, 4, 4);
+			rec = new Rectangle(x, y, 20, 8);
 			break;
 		default:
 			break;
@@ -69,28 +70,28 @@ public class Missile extends Thread {
 			switch (dir) {
 			case 0:
 				y -= speed;
-				rec = new Rectangle(x, y, 4, 4);
+				rec = new Rectangle(x, y, 8, 20);
 				if (y < 37) {
 					alive = false;
 				}
 				break;
 			case 1:
 				x += speed;
-				rec = new Rectangle(x, y, 4, 4);
+				rec = new Rectangle(x, y, 20, 8);
 				if (x > width - 25) {
 					alive = false;
 				}
 				break;
 			case 2:
 				y += speed;
-				rec = new Rectangle(x, y, 4, 4);
+				rec = new Rectangle(x, y, 8, 20);
 				if (y > heigth - 22) {
 					alive = false;
 				}
 				break;
 			case 3:
 				x -= speed;
-				rec = new Rectangle(x, y, 4, 4);
+				rec = new Rectangle(x, y, 20, 8);
 				if (x < 19) {
 					alive = false;
 				}
@@ -98,7 +99,11 @@ public class Missile extends Thread {
 			default:
 				break;
 			}
-			rec = new Rectangle(x, y, 4, 4);
+			if (rec.intersects(player.getRec())) {
+				player.hurt();
+				alive = false;
+				break;
+			}
 			try {
 				Thread.sleep(3);
 			} catch (InterruptedException e) {

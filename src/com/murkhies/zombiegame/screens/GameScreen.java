@@ -50,8 +50,7 @@ public class GameScreen extends JPanel {
 		player.start();
 		ui = new UI(player, start, this);
 		new Generate(start, this).start();
-
-		for (int i = 0; i < 0; i++) {
+		for (int i = 0; i < 3; i++) {
 			basicZombieList.add(new BasicZombie(start, this, player));
 		}
 		
@@ -61,35 +60,43 @@ public class GameScreen extends JPanel {
 	}
 
 	public void paint(Graphics g) {
-		g.setColor(Color.blue);
-		for (AmmoBox ammoBox : ammoBoxList) {
-			ammoBox.paint(g);
-		}
-		for (Heart heart : heartList) {
-			heart.paint(g);
-		}
-		for (BasicZombie basicZombie : basicZombieList) {
-			basicZombie.paint(g);
-		}
-		if (boss != null) {
-			boss.paint(g);
-		}
-		player.paint(g);
-		if (boss != null && boss.getY() > player.getY()-70) {
-			boss.paint(g);
-		}
-		for (BasicZombie basicZombie : basicZombieList) {
-			if (basicZombie.getY() > player.getY()) {
-				basicZombie.paint(g);
+		if (running = true) {
+			g.setColor(Color.blue);
+			for (AmmoBox ammoBox : ammoBoxList) {
+				ammoBox.paint(g);
 			}
+			for (Heart heart : heartList) {
+				heart.paint(g);
+			}
+			for (BasicZombie basicZombie : basicZombieList) {
+				if (basicZombie != null) {
+					basicZombie.paint(g);
+				}
+			}
+			if (boss != null) {
+				boss.paint(g);
+			}
+			player.paint(g);
+			if (boss != null && boss.getY() > player.getY()-70) {
+				boss.paint(g);
+			}
+			for (BasicZombie basicZombie : basicZombieList) {
+				if (basicZombie.getY() > player.getY()) {
+					basicZombie.paint(g);
+				}
+			}
+			for (Bullet bullet : bulletList) {
+				if (bullet != null) {
+					
+				}bullet.paint(g);
+			}
+			for (Missile missile : missileList) {
+				if (missile != null) {
+					missile.paint(g);
+				}
+			}
+			ui.paint(g);
 		}
-		for (Bullet bullet : bulletList) {
-			bullet.paint(g);
-		}
-		for (Missile missile : missileList) {
-			missile.paint(g);
-		}
-		ui.paint(g);
 	}
 	
 	public void newShoot() {
@@ -128,7 +135,7 @@ public class GameScreen extends JPanel {
 	public void newZombie() {
 		if (basicZombieList.size() > 5) {
 			basicZombieList.add(new BasicZombie(start, this, player));
-		} else if (basicZombieList.size() < 5) {
+		} else if (basicZombieList.size() < 3) {
 			for (int i = 0; i < 20; i++) {
 				basicZombieList.add(new BasicZombie(start, this, player));
 			}
@@ -148,7 +155,7 @@ public class GameScreen extends JPanel {
 
 	public void missileExplosion(Missile missile) {
 		for (int i = 0; i < 5; i++) {
-			new ExplosionOnCoordMissile(missile.getX(), missile.getY()-1, this).paint(start.getGraphics());
+			new ExplosionOnCoordMissile(missile.getX()-18, missile.getY()-20, this).paint(start.getGraphics());
 		}
 		missileList.remove(missile);
 	}
@@ -157,6 +164,23 @@ public class GameScreen extends JPanel {
 		Missile missile = new Missile(player, start, boss.getDir(), start.HEIGHT, start.WIDTH, this, basicZombieList, boss);
 		new Thread(missile).start();
 		missileList.add(missile);
+	}
+	
+	public void end() {
+		running = false;
+		for (BasicZombie zombie : basicZombieList) {
+			zombie.die();
+		}
+		basicZombieList = new ArrayList<BasicZombie>();
+		for (Bullet bullet : bulletList) {
+			bullet.alive = false;
+		}
+		bulletList = new ArrayList<Bullet>();
+		for (Missile missile : missileList) {
+			missile.alive = false;
+		}
+		missileList = new ArrayList<Missile>();
+		boss = null;
 	}
 
 }

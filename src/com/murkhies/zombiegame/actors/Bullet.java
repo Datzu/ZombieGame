@@ -14,7 +14,7 @@ public class Bullet extends Thread {
 	Image image;
 	int dir, x, y, heigth, width;
 	int speed = 4;
-	boolean alive = true;
+	public boolean alive = true;
 	GameScreen gameScreen;
 	Start start;
 	List<BasicZombie> basicZombieList;
@@ -74,7 +74,7 @@ public class Bullet extends Thread {
 				}
 			}
 			if (boss != null) {
-				if (boss.getDir() == 2) {
+				if (dir == boss.getDir()) {
 					if (rec.intersects(boss.getRec2())) {
 						boss.hurt();
 						alive = false;

@@ -3,11 +3,14 @@ package com.murkhies.zombiegame;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import com.murkhies.zombiegame.actors.Bullet;
+import com.murkhies.zombiegame.actors.Missile;
 import com.murkhies.zombiegame.screens.GameScreen;
 import com.murkhies.zombiegame.screens.TitleScreen;
 import com.murkhies.zombiegame.utils.Art;
@@ -49,7 +52,7 @@ public class Start extends JFrame implements Runnable {
 	
 	@Override
 	public void run() {
-		while (gameScreen != null) {
+		while (gameScreen != null && gameScreen.isRunning()) {
 			long time = System.currentTimeMillis();
 
 			time = (1000 / FPS) - (System.currentTimeMillis() - time);

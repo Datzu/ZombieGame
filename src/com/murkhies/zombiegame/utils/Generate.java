@@ -27,9 +27,9 @@ public class Generate extends Thread {
 			if (new Random().nextFloat() > 0.50f) {
 				gameScreen.newHeart(new Heart(gameScreen, start));
 			}
-//			if (new Random().nextFloat() > 0.30f) {
-//				gameScreen.newZombie();
-//			}
+			if (new Random().nextFloat() > 0.30f) {
+				gameScreen.newZombie();
+			}
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {

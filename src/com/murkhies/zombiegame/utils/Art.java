@@ -40,7 +40,7 @@ public class Art {
 		
 		heart = new ImageIcon(getClass().getResource("/heart.png")).getImage();
 		explosion = new ImageIcon(getClass().getResource("/explosion.png")).getImage();
-		explosion = new ImageIcon(getClass().getResource("/explosionMissile.png")).getImage();
+		explosionMissile = new ImageIcon(getClass().getResource("/explosionMissile.png")).getImage();
 		bullet = new ImageIcon(getClass().getResource("/bullet.png")).getImage();
 		ammoBox = new ImageIcon(getClass().getResource("/ammoBox.png")).getImage();
 		

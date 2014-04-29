@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JPanel;
 
@@ -133,9 +134,8 @@ public class GameScreen extends JPanel {
 	}
 
 	public void newZombie() {
-		if (basicZombieList.size() > 5) {
-			basicZombieList.add(new BasicZombie(start, this, player));
-		} else if (basicZombieList.size() < 3) {
+		basicZombieList.add(new BasicZombie(start, this, player));
+		if (new Random().nextFloat() > 0.8f) {
 			for (int i = 0; i < 10; i++) {
 				basicZombieList.add(new BasicZombie(start, this, player));
 			}

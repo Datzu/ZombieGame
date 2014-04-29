@@ -90,7 +90,7 @@ public class Start extends JFrame implements Runnable {
 
 	public void getXmlConf() {
 		xmlParser = new XMLParser();
-		xmlParser.setPath(new Strings().FILE_TO_XML);
+		xmlParser.setPath(new Strings().FILE_TO_XML_SETTINGS);
 		xmlParser.build();
 		xmlParser.setTagName("settings");
 		try {
@@ -134,6 +134,10 @@ public class Start extends JFrame implements Runnable {
 
 	public void stopAll() {
 		gameScreen = null;
+	}
+
+	public void saveHighScore(String cad) {
+		
 	}
 
 }

@@ -39,7 +39,6 @@ public class SettingsScreen extends JPanel {
 		
 		setLayout(null);
 		
-		//WIDTH
 		JLabel lblWidth = new JLabel("Width:");
 		lblWidth.setBounds((800*LEFT_MARGING_LABEL)/100, (600*50)/100, (800*20)/100, (600*5)/100);
 		lblWidth.setForeground(foregroundColor);
@@ -54,8 +53,6 @@ public class SettingsScreen extends JPanel {
 		txtWidth.setBorder(null);
 		add(txtWidth);
 		
-		
-		//HEIGTH
 		JLabel lblHeigth = new JLabel("Heigth:");
 		lblHeigth.setBounds((800*LEFT_MARGING_LABEL)/100, (600*60)/100, (800*20)/100, (600*5)/100);
 		lblHeigth.setForeground(foregroundColor);
@@ -70,8 +67,6 @@ public class SettingsScreen extends JPanel {
 		txtHeigth.setBorder(null);
 		add(txtHeigth);
 		
-		
-		// FPS
 		JLabel lblFps = new JLabel("FPS:");
 		lblFps.setBounds((800*LEFT_MARGING_LABEL)/100, (600*70)/100, (800*20)/100, (600*5)/100);
 		lblFps.setForeground(foregroundColor);
@@ -99,7 +94,6 @@ public class SettingsScreen extends JPanel {
 		txtFPS.setBorder(null);
 		add(txtFPS);
 
-		// LAUNCH
 		JButton btnLaunch = new JButton("Save");
 		btnLaunch.setBounds((800*LEFT_MARGING_TXT)/100, (600*80)/100, (800*20)/100, (600*5)/100);
 		btnLaunch.setBackground(backgroundColor);
@@ -144,7 +138,7 @@ public class SettingsScreen extends JPanel {
 	
 	public void paint(Graphics g) {
 		setOpaque(false);
-		g.drawImage(new Art().getGeneralBackground(), 0, 0, getWidth(), getHeight(), this);
+		g.drawImage(Start.art.getGeneralBackground(), 0, 0, getWidth(), getHeight(), this);
 		super.paint(g);
 	}
 	

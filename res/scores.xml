@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<highScores xmlns="http://www.example.org/settings"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.org/settings scores.xsd ">
+	<player>
+		<name>Player 1</name>
+		<score>1000</score>
+	</player>
+	<player>
+		<name>Player 2</name>
+		<score>500</score>
+	</player>
+	<player>
+		<name>Player 3</name>
+		<score>250</score>
+	</player>
+	<player>
+		<name>Player 4</name>
+		<score>200</score>
+	</player>
+</highScores>

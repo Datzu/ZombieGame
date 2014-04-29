@@ -1,15 +1,13 @@
 package com.murkhies.zombiegame.actors;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 import com.murkhies.zombiegame.Start;
 import com.murkhies.zombiegame.screens.GameScreen;
-import com.murkhies.zombiegame.screens.TitleScreen;
+import com.murkhies.zombiegame.screens.ScoreScreen;
 import com.murkhies.zombiegame.utils.InputHandler;
 
 public class Player extends Thread {
@@ -61,7 +59,7 @@ public class Player extends Thread {
 		}
 		gameScreen.end();
 		start.stopAll();
-		start.changePanel(new TitleScreen(start));
+		start.changePanel(new ScoreScreen(start));
 	}
 	
 	public void hurt() {

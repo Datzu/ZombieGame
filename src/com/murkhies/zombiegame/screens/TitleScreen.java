@@ -129,10 +129,6 @@ public class TitleScreen extends JPanel {
 			}
 		});
 		add(btnExit);
-		
-		
-		
-		
 
 	}
 

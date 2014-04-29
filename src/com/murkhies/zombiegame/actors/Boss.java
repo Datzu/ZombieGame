@@ -26,6 +26,7 @@ public class Boss extends Thread {
 	int x = 0, y = 0;
 	int speed = 30;
 	int health = 30;
+	int maxDamage = 0;
 
 	long time = System.currentTimeMillis();
 
@@ -82,6 +83,7 @@ public class Boss extends Thread {
 	
 	private void changeDir() {
 		speed = 30;
+		maxDamage = 0;
 		switch (dir) {
 			case 0:
 				while (y > 100) {
@@ -250,9 +252,9 @@ public class Boss extends Thread {
 	}
 
 	public void hurt() {
-		health--;
-		if (health == 0) {
-
+		if (maxDamage < 3) {
+			maxDamage++;
+			health--;
 		}
 	}
 

@@ -183,4 +183,8 @@ public class GameScreen extends JPanel {
 		boss = null;
 	}
 
+	public int getPoints() {
+		return ui.getPoints();
+	}
+
 }

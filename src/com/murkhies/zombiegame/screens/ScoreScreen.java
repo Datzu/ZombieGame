@@ -20,13 +20,16 @@ public class ScoreScreen extends JPanel {
 	Image image;
 	
 	private JTextField txtName;
+	public int points;
 	
 	final Color foregroundColor = Color.white;
 	final Color backgroundColor = Color.black;
 
-	public ScoreScreen(final Start start) {
+	public ScoreScreen(final Start start, int points) {
 
 		this.start = start;
+		
+		this.points = points;
 		
 		setLayout(null);
 		
@@ -64,12 +67,16 @@ public class ScoreScreen extends JPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				start.saveHighScore(txtName.getText().toString());
+				start.saveHighScore(txtName.getText().toString(), getPoints());
 				start.changePanel(new TitleScreen(start));
 			}
 		});
 		add(btnSave);
 				
+	}
+	
+	public int getPoints() {
+		return points;
 	}
 
 	public void paint(Graphics g) {

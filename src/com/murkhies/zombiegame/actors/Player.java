@@ -59,11 +59,11 @@ public class Player extends Thread {
 		}
 		gameScreen.end();
 		start.stopAll();
-		start.changePanel(new ScoreScreen(start));
+		start.changePanel(new ScoreScreen(start, gameScreen.getPoints()));
 	}
 	
 	public void hurt() {
-		health -= 2;
+		health--;
 	}
 
 	public void up() {

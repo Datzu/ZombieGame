@@ -1,8 +1,6 @@
 package com.murkhies.zombiegame.actors;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.util.Random;
@@ -24,7 +22,8 @@ public class Boss extends Thread {
 	Rectangle rec2;
 
 	int x = 0, y = 0;
-	int speed = 30;
+	int speed = 0;
+	int lastSpeed = 0;
 	int health = 30;
 	int maxDamage = 0;
 
@@ -37,6 +36,8 @@ public class Boss extends Thread {
 		this.gameScreen = gameScreen;
 		x = start.WIDTH / 2 - 120;
 		y = -90;
+		speed = start.WIDTH*3/100;
+		lastSpeed = speed;
 		image = new Art().getBoss(2);
 		this.player = player;
 		rec = new Rectangle(x + 15, y, 150, 100);
@@ -86,7 +87,7 @@ public class Boss extends Thread {
 		maxDamage = 0;
 		switch (dir) {
 			case 0:
-				while (y > 100) {
+				while (y > (start.HEIGHT*new Random().nextInt(50)+10)/100) {
 					
 					time = (1000 / start.FPS) - (System.currentTimeMillis() - time);
 					
@@ -102,10 +103,10 @@ public class Boss extends Thread {
 					}
 				}
 				
-				speed = 20;
+				speed = lastSpeed;
 				break;
 			case 2:
-				while (y < 400) {
+				while (y < (start.HEIGHT*new Random().nextInt(90)+50)/100) {
 					
 					time = (1000 / start.FPS) - (System.currentTimeMillis() - time);
 					
@@ -121,7 +122,7 @@ public class Boss extends Thread {
 					}
 				}
 				
-				speed = 20;
+				speed = lastSpeed;
 				break;
 			default:
 				break;
@@ -159,7 +160,7 @@ public class Boss extends Thread {
 
 	private void firtsFase() {
 		
-		while (y < 400) {
+		while (y < start.HEIGHT*80/100) {
 			
 			time = (1000 / start.FPS) - (System.currentTimeMillis() - time);
 			
@@ -171,9 +172,7 @@ public class Boss extends Thread {
 				}
 			}
 		}
-		
-		speed = 20;
-		
+				
 	}
 
 	public void up() {
@@ -254,7 +253,7 @@ public class Boss extends Thread {
 	public void hurt() {
 		if (maxDamage < 3) {
 			maxDamage++;
-			health--;
+			health -= 2;
 		}
 	}
 

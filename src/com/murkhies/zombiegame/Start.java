@@ -136,8 +136,8 @@ public class Start extends JFrame implements Runnable {
 		gameScreen = null;
 	}
 
-	public void saveHighScore(String cad) {
-		
+	public void saveHighScore(String cad, int points) {
+		xmlParser.saveScore(cad, points);
 	}
 
 }

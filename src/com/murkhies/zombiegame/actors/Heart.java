@@ -19,8 +19,8 @@ public class Heart {
 	public Heart(GameScreen gameScreen, Start start) {
 		this.gameScreen = gameScreen;
 		image = Start.art.getHeart();
-		x = new Random().nextInt(start.WIDTH-70)+50;
-		y = new Random().nextInt(start.HEIGHT-70)+50;
+		x = new Random().nextInt(start.WIDTH-100)+50;
+		y = new Random().nextInt(start.HEIGHT-100)+50;
 		rec = new Rectangle(x, y, 16, 16);
 	}
 	

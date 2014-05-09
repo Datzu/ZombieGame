@@ -40,12 +40,12 @@ public class SettingsScreen extends JPanel {
 		setLayout(null);
 		
 		JLabel lblWidth = new JLabel("Width:");
-		lblWidth.setBounds((800*LEFT_MARGING_LABEL)/100, (600*50)/100, (800*20)/100, (600*5)/100);
+		lblWidth.setBounds((start.WIDTH*LEFT_MARGING_LABEL)/100, (start.HEIGHT*50)/100, (start.WIDTH*20)/100, (start.HEIGHT*5)/100);
 		lblWidth.setForeground(foregroundColor);
 		add(lblWidth);
 		
 		txtWidth = new JTextField();
-		txtWidth.setBounds((800*LEFT_MARGING_TXT)/100, (600*50)/100, (800*20)/100, (600*5)/100);
+		txtWidth.setBounds((start.WIDTH*LEFT_MARGING_TXT)/100, (start.HEIGHT*50)/100, (start.WIDTH*20)/100, (start.HEIGHT*5)/100);
 		txtWidth.setBackground(backgroundColor);
 		txtWidth.setForeground(foregroundColor);
 		txtWidth.setHorizontalAlignment(SwingConstants.CENTER);
@@ -54,12 +54,12 @@ public class SettingsScreen extends JPanel {
 		add(txtWidth);
 		
 		JLabel lblHeigth = new JLabel("Heigth:");
-		lblHeigth.setBounds((800*LEFT_MARGING_LABEL)/100, (600*60)/100, (800*20)/100, (600*5)/100);
+		lblHeigth.setBounds((start.WIDTH*LEFT_MARGING_LABEL)/100, (start.HEIGHT*60)/100, (start.WIDTH*20)/100, (start.HEIGHT*5)/100);
 		lblHeigth.setForeground(foregroundColor);
 		add(lblHeigth);
 		
 		txtHeigth = new JTextField();
-		txtHeigth.setBounds((800*LEFT_MARGING_TXT)/100, (600*60)/100, (800*20)/100, (600*5)/100);
+		txtHeigth.setBounds((start.WIDTH*LEFT_MARGING_TXT)/100, (start.HEIGHT*60)/100, (start.WIDTH*20)/100, (start.HEIGHT*5)/100);
 		txtHeigth.setBackground(backgroundColor);
 		txtHeigth.setForeground(foregroundColor);
 		txtHeigth.setHorizontalAlignment(SwingConstants.CENTER);
@@ -68,12 +68,12 @@ public class SettingsScreen extends JPanel {
 		add(txtHeigth);
 		
 		JLabel lblFps = new JLabel("FPS:");
-		lblFps.setBounds((800*LEFT_MARGING_LABEL)/100, (600*70)/100, (800*20)/100, (600*5)/100);
+		lblFps.setBounds((start.WIDTH*LEFT_MARGING_LABEL)/100, (start.HEIGHT*70)/100, (start.WIDTH*20)/100, (start.HEIGHT*5)/100);
 		lblFps.setForeground(foregroundColor);
 		add(lblFps);
 		
 		txtFPS = new JTextField();
-		txtFPS.setBounds((800*LEFT_MARGING_TXT)/100, (600*70)/100, (800*20)/100, (600*5)/100);
+		txtFPS.setBounds((start.WIDTH*LEFT_MARGING_TXT)/100, (start.HEIGHT*70)/100, (start.WIDTH*20)/100, (start.HEIGHT*5)/100);
 		txtFPS.setBackground(backgroundColor);
 		txtFPS.setForeground(foregroundColor);
 		txtFPS.setHorizontalAlignment(SwingConstants.CENTER);
@@ -95,7 +95,7 @@ public class SettingsScreen extends JPanel {
 		add(txtFPS);
 
 		JButton btnLaunch = new JButton("Save");
-		btnLaunch.setBounds((800*LEFT_MARGING_TXT)/100, (600*80)/100, (800*20)/100, (600*5)/100);
+		btnLaunch.setBounds((start.WIDTH*40)/100, (start.HEIGHT*80)/100, (start.WIDTH*20)/100, (start.HEIGHT*5)/100);
 		btnLaunch.setBackground(backgroundColor);
 		btnLaunch.setForeground(foregroundColor);
 		btnLaunch.setHorizontalAlignment(SwingConstants.CENTER);

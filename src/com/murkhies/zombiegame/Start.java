@@ -3,20 +3,16 @@ package com.murkhies.zombiegame;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import com.murkhies.zombiegame.actors.Bullet;
-import com.murkhies.zombiegame.actors.Missile;
 import com.murkhies.zombiegame.screens.GameScreen;
 import com.murkhies.zombiegame.screens.TitleScreen;
 import com.murkhies.zombiegame.utils.Art;
 import com.murkhies.zombiegame.utils.InputHandler;
 import com.murkhies.zombiegame.utils.Strings;
-import com.murkhies.zombiegame.utils.UI;
 import com.murkhies.zombiegame.utils.XMLParser;
 
 public class Start extends JFrame implements Runnable {
@@ -112,7 +108,7 @@ public class Start extends JFrame implements Runnable {
 			}
 		});
 	}
-	
+
 	public void setDefault() {
 		setSize(WIDTH, HEIGHT);
 		setLocationRelativeTo(null);

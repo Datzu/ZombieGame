@@ -160,8 +160,8 @@ public class BasicZombie extends Thread {
 	}
 
 	public void hurt() {
-		health--;
-		if (health == 0) {
+		health -= 2;
+		if (health <= 0) {
 			gameScreen.removeZombie(this);
 		}
 	}

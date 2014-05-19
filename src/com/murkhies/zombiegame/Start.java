@@ -3,15 +3,21 @@ package com.murkhies.zombiegame;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import com.murkhies.zombiegame.screens.GameScreen;
 import com.murkhies.zombiegame.screens.TitleScreen;
 import com.murkhies.zombiegame.utils.Art;
 import com.murkhies.zombiegame.utils.InputHandler;
+import com.murkhies.zombiegame.utils.Score;
 import com.murkhies.zombiegame.utils.Strings;
 import com.murkhies.zombiegame.utils.XMLParser;
 
@@ -134,6 +140,29 @@ public class Start extends JFrame implements Runnable {
 
 	public void saveHighScore(String cad, int points) {
 		xmlParser.saveScore(cad, points);
+	}
+	
+	public ArrayList<Score> getScores() {
+		
+		ArrayList<Score> scoreList = new ArrayList<Score>();
+		xmlParser.setPath(new Strings().FILE_TO_XML_HIGHSCORE);
+		xmlParser.build();
+		NodeList nodeList = xmlParser.getAllValue("player");
+		
+		for (int temp = 0; temp < nodeList.getLength(); temp++) {
+			Node nNode = nodeList.item(temp);
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element eElement = (Element) nNode;
+				scoreList.add(new Score(eElement.getElementsByTagName("name").item(0).getTextContent(), Integer.parseInt(eElement.getElementsByTagName("score").item(0).getTextContent())));
+			}
+		}
+		
+		for (int i = 0; i < scoreList.size(); i++) {
+			System.out.println(scoreList.get(0).getName());
+		}
+		
+		return scoreList;
+		
 	}
 
 }

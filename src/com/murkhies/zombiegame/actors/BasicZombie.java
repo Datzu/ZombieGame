@@ -1,6 +1,5 @@
 package com.murkhies.zombiegame.actors;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -155,6 +154,7 @@ public class BasicZombie extends Thread {
 		return rec;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void die() {
 		stop();
 	}

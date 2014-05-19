@@ -69,7 +69,6 @@ public class Boss extends Thread {
 					rec = new Rectangle(x + 15, y, 150, 100);
 					rec2 = new Rectangle(x + 50, y + 5, 85, 62);
 					i++;
-					System.out.println(i + " " + iTmp);
 					if (i == iTmp) {
 						i = 0;
 						iTmp = new Random().nextInt(20)+1;
@@ -80,7 +79,7 @@ public class Boss extends Thread {
 				}
 			}
 		}
-		gameScreen.end();
+		player.endGame(true);
 	}
 	
 	private void changeDir() {
@@ -110,8 +109,6 @@ public class Boss extends Thread {
 				break;
 			case 2:
 				iTmp = start.HEIGHT - (new Random().nextInt(200)+200); 
-				System.out.println(start.HEIGHT);
-				System.out.println("Next jump: " + iTmp);
 				while (y < iTmp) {
 					
 					time = (1000 / start.FPS) - (System.currentTimeMillis() - time);
@@ -252,6 +249,7 @@ public class Boss extends Thread {
 		return rec2;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void die() {
 		stop();
 	}
@@ -259,7 +257,7 @@ public class Boss extends Thread {
 	public void hurt() {
 		if (maxDamage < 3) {
 			maxDamage++;
-			health -= 3;
+			health--;
 		}
 	}
 

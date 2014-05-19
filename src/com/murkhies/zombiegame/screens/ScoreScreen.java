@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -20,18 +21,29 @@ public class ScoreScreen extends JPanel {
 	Image image;
 	
 	private JTextField txtName;
+	private JLabel lblState;
 	public int points;
 	
 	final Color foregroundColor = Color.white;
 	final Color backgroundColor = Color.black;
 
-	public ScoreScreen(final Start start, int points) {
+	public ScoreScreen(final Start start, int points, boolean state) {
 
 		this.start = start;
 		
 		this.points = points;
 		
 		setLayout(null);
+		
+		if (state) {
+			lblState = new JLabel("You win! Points: " + points);
+		} else {
+			lblState = new JLabel("You loose! Points: " + points);
+		}
+		lblState.setBounds((start.WIDTH*42)/100, (start.HEIGHT*40)/100, (start.WIDTH*20)/100, (start.HEIGHT*5)/100);
+		lblState.setBackground(backgroundColor);
+		lblState.setForeground(foregroundColor);
+		add(lblState);
 		
 		txtName = new JTextField("Insert your name");
 		txtName.setBounds((start.WIDTH*40)/100, (start.HEIGHT*60)/100, (start.WIDTH*20)/100, (start.HEIGHT*5)/100);

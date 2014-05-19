@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 import com.murkhies.zombiegame.Start;
-import com.murkhies.zombiegame.utils.Art;
 
 public class Explosion {
 	

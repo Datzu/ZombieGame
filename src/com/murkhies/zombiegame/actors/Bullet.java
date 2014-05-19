@@ -3,7 +3,6 @@ package com.murkhies.zombiegame.actors;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.murkhies.zombiegame.Start;

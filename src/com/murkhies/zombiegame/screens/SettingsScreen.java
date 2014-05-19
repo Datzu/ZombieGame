@@ -15,7 +15,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import com.murkhies.zombiegame.Start;
-import com.murkhies.zombiegame.utils.Art;
 
 public class SettingsScreen extends JPanel {
 
@@ -82,7 +81,6 @@ public class SettingsScreen extends JPanel {
 			
 			@Override
 			public void focusLost(FocusEvent arg0) {
-				// TODO Auto-generated method stub
 				
 			}
 			

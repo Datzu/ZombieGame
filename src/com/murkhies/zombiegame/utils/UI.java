@@ -2,8 +2,6 @@ package com.murkhies.zombiegame.utils;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.font.TextAttribute;
-import java.util.Random;
 
 import com.murkhies.zombiegame.Start;
 import com.murkhies.zombiegame.actors.Player;

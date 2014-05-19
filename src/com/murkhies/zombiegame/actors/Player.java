@@ -57,9 +57,13 @@ public class Player extends Thread {
 				}
 			}
 		}
+		endGame(false);
+	}
+	
+	public void endGame(boolean end) {
 		gameScreen.end();
 		start.stopAll();
-		start.changePanel(new ScoreScreen(start, gameScreen.getPoints()));
+		start.changePanel(new ScoreScreen(start, gameScreen.getPoints(), end));
 	}
 	
 	public void hurt() {
@@ -130,6 +134,7 @@ public class Player extends Thread {
 		g.drawImage(image, x, y, 32, 32, gameScreen);
 	}
 	
+	@SuppressWarnings("static-access")
 	void update() {
 		if (inputHandler.isKeyDown(KeyEvent.VK_D)) {
 			right();

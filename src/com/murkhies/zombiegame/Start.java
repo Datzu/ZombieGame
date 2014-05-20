@@ -13,6 +13,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.murkhies.zombiegame.actors.BackgroundSound;
 import com.murkhies.zombiegame.screens.GameScreen;
 import com.murkhies.zombiegame.screens.TitleScreen;
 import com.murkhies.zombiegame.utils.Art;
@@ -49,6 +50,7 @@ public class Start extends JFrame implements Runnable {
 		addKeyListener(inputHandler);
 		setFocusable(true);
 		add(new TitleScreen(this));
+		new BackgroundSound();
 		repaint();
 	}
 	
@@ -56,7 +58,6 @@ public class Start extends JFrame implements Runnable {
 	public void run() {
 		while (gameScreen != null && gameScreen.isRunning()) {
 			long time = System.currentTimeMillis();
-
 			time = (1000 / FPS) - (System.currentTimeMillis() - time);
 
 			if (time > 0) {
@@ -155,10 +156,6 @@ public class Start extends JFrame implements Runnable {
 				Element eElement = (Element) nNode;
 				scoreList.add(new Score(eElement.getElementsByTagName("name").item(0).getTextContent(), Integer.parseInt(eElement.getElementsByTagName("score").item(0).getTextContent())));
 			}
-		}
-		
-		for (int i = 0; i < scoreList.size(); i++) {
-			System.out.println(scoreList.get(0).getName());
 		}
 		
 		return scoreList;

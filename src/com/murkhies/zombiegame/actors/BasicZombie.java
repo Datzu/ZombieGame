@@ -103,8 +103,6 @@ public class BasicZombie extends Thread {
 			g.drawImage(Start.art.getHeart(), x+i*8, y-10, gameScreen);
 		}
 		g.drawImage(image, x, y, 24, 32, gameScreen);
-//		g.setColor(Color.blue);
-//		g.drawRect(x, y, 24, 32);
 	}
 	
 	void update() {
@@ -142,6 +140,9 @@ public class BasicZombie extends Thread {
 		rec = new Rectangle(x, y, 24, 32);
 		if (rec.intersects(player.getRec())) {
 			player.hurt();
+			if (player.health > 0) {
+				new Bite();
+			}
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -160,6 +161,7 @@ public class BasicZombie extends Thread {
 	}
 
 	public void hurt() {
+		new Bite();
 		health -= 2;
 		if (health <= 0) {
 			gameScreen.removeZombie(this);

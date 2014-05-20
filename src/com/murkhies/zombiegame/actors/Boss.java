@@ -135,6 +135,7 @@ public class Boss extends Thread {
 	private void shoot() {
 		if (x-40 < player.getX() && x+50 > player.getX()) {
 			gameScreen.newMissile();
+			new BulletSound();
 		}
 	}
 	

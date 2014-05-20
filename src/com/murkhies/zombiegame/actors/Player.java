@@ -67,7 +67,7 @@ public class Player extends Thread {
 	}
 	
 	public void hurt() {
-		health--;
+//		health--;
 	}
 
 	public void up() {
@@ -154,6 +154,7 @@ public class Player extends Thread {
 				bullets--;
 				gameScreen.newShoot();
 				inputHandler.setKeys(KeyEvent.VK_SPACE, false);
+				new BulletSound();
 			}
 		}
 		rec.setBounds(x, y, 32, 32);

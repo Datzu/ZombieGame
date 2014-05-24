@@ -67,7 +67,7 @@ public class Player extends Thread {
 	}
 	
 	public void hurt() {
-//		health--;
+		health--;
 	}
 
 	public void up() {

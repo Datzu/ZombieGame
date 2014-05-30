@@ -167,6 +167,7 @@ public class TitleScreen extends JPanel {
 	public void paint(Graphics g) {
 		setOpaque(false);
 		g.drawImage(new Art().getGeneralBackground(), 0, 0, getWidth(), getHeight(), this);
+		super.paint(g);
 	}
 
 }
